@@ -17,6 +17,9 @@ AllCops:
 require:
   - rubocop-rails
 
+Style/EndOfLine:
+  EnforcedStyle: lf
+
 Style/Encoding:
   Enabled: false
 
