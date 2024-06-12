@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: %i[show edit update destroy]
+  before_action :set_photo, only: %i[show edit update destroy toggle_like]
 
   # GET /photos or /photos.json
   def index
@@ -55,6 +55,13 @@ class PhotosController < ApplicationController
     end
   end
 
+  def toggle_like
+    @photo.increment!(:likes)
+    respond_to do |format|
+      format.json { render json: { likes: @photo.likes } }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -66,4 +73,6 @@ class PhotosController < ApplicationController
   def photo_params
     params.require(:photo).permit(:title, :description, :category, :likes, :image, :timestamps)
   end
+
+  
 end
