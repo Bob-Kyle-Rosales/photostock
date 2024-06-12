@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: charly712
+    volumes:
+      - my_app:/var/lib/postgresql/data
+    networks:
+      - photostock_my_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - photostock_my_network
+
+volumes:
+  my_app:
+
+networks:
+  photostock_my_network:
