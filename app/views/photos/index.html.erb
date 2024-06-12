@@ -1,0 +1,31 @@
+<div class="global-page"> 
+  <div id="photos" class="global-content" style="text-align: center;">
+    <h1>All Photos</h1>
+    
+    <div style="margin-bottom: 20px;">
+      <%= link_to "New Photo", new_photo_path, class: "btn btn-primary" %>
+    </div>
+    
+    <div class="global-page global-flex">
+      <% @photos.each do |photo| %>
+        <div class="photo-card">
+          <div class="photo-card-content">
+            <p class="photo-title">Title: <%= photo.title %></p>
+            <p class="photo-description">Description: <%= photo.description %></p>
+            <p class="photo-category">Category: <%= photo.category %></p>
+            <p class="photo-likes">Likes: <%= photo.likes %></p>
+            
+            <!-- Render the image if it is attached -->
+            <% if photo.image.attached? %>
+              <div class="photo-image">
+                <%= link_to photo do %>
+                  <%= image_tag photo.image, style: "width: auto; height: auto; max-height: 200px;" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
